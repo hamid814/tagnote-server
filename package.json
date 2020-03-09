@@ -1,0 +1,16 @@
+{
+  "name": "hashnote-server",
+  "version": "1.0.0",
+  "description": "server for hashnote app with express",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server"
+  },
+  "author": "hamid",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  }
+}
