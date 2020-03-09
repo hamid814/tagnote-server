@@ -8,14 +8,12 @@ const app = express()
 app.use(express.json())
 app.use(express.static('public'))
 
-app.get('/', (req, res) => {
-  res.send('hashnote api v.1')
-  res.sendfi
-})
+// app.get('/', (req, res) => {
+  // res.sendFile('index.html')
+// })
 
 app.get('/tags', (req, res) => {
   res.send('your requested to tags')
-  res.sendFile('index.html')
 })
 
 app.get('/tags/:id', (req, res) => {

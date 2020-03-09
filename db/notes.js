@@ -32,7 +32,8 @@ const notes = [
       ]
     },
     date: 'date'
-  },{
+  },
+  {
     id: 'note_id_3',
     text: 'text for note 3',
     tags: {
@@ -65,6 +66,31 @@ const notes = [
         {
           id: 'tag_id_3',
           name: 'movie'
+        },
+        {
+          id: 'tag_id_4',
+          name: 'work'
+        },
+      ]
+    },
+    date: 'date'
+  },
+  {
+    id: 'note_id_5',
+    text: '4th note text',
+    tags: {
+      first: {
+        id: 'tag_id_4',
+        name: 'work'
+      },
+      other: [
+        {
+          id: 'tag_id_3',
+          name: 'movie'
+        },
+        {
+          id: 'tag_id_2',
+          name: 'techy'
         },
       ]
     },
