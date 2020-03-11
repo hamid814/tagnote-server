@@ -5,60 +5,14 @@ const notes = require('./db/notes.js')
 
 const app = express()
 
-app.use(express.json())
+app.use(express.json({ extended: false }))
 app.use(express.static('public'))
 
-// app.get('/', (req, res) => {
-  // res.sendFile('index.html')
-// })
-
-app.get('/tags', (req, res) => {
-  res.send('your requested to tags')
-})
-
-app.get('/tags/:id', (req, res) => {
-  const tag = tags.filter(tag => tag.id === req.params.id)
-  
-  if(tag.length === 1) {
-    res.send(tag[0])
-  } else if(tag.length === 0) {
-    res.status(404).send({
-      msg: 'tag not found'
-    })
-  } else {
-    res.status(500).send({
-      msg: 'internal server error'
-    })
-  }
-})
-
-app.get('/notes', (req, res) => {
-  res.send(notes)
-})
-
-app.get('/notes/id/:id', (req, res) => {
-  const note = notes.filter(note => note.id === req.params.id)
-  
-  if(note.length === 1) {
-    res.send(note[0])
-  } else if(note.length === 0) {
-    res.status(404).send({
-      msg: 'tag not found'
-    })
-  } else {
-    res.status(500).send({
-      msg: 'internal server error'
-    })
-  }
-})
-
-app.get('/notes/tag/:tagid', (req, res) => {
-  const primaryList = notes.filter(note => note.tags.first.id === req.params.tagid)
-
-  // const 
-
-  res.send(primaryList)
-})
+// Routes
+app.use('/tags', require('./routes/tags'));
+app.use('/notes', require('./routes/notes'))
+app.use('/colors', require('./routes/colors'))
+app.use('/test', require('./routes/test'))
 
 const PORT = process.env.PORT || 5000
 
