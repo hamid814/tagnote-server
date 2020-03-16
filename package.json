@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server",
-    "server": "nodemon server",
+    "server": "nodemon server"
   },
   "author": "hamid",
   "license": "MIT",
