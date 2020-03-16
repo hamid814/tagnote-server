@@ -1,4 +1,4 @@
-const notes = [
+let notes = [
   {
     id: 'note_id_1',
     text: 'text',

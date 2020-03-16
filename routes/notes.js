@@ -1,5 +1,5 @@
 const express = require('express')
-const notes = require('../db/notes')
+let notes = require('../db/notes')
 
 const router = express.Router()
 
@@ -45,7 +45,9 @@ router.get('/tag/:tagid', (req, res) => {
 // @route     POST /notes
 // @desc      add new note
 router.post('/', (req, res) => {
-  console.log(req.body)
+  notes = [...notes, req.body]
+  
+  res.send(req.body)
 })
 
 module.exports = router

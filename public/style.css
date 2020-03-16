@@ -1,7 +1,66 @@
-h1 {
+body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-    text-align: center;
+  background-color: #333;
+  color: #f4f4f4;
+}
+
+a {
+  color: #f4f4f4;
+}
+
+h1 {
+  text-align: center;
   color: #6c9;
+}
+
+h2, h3 {
+  color: #9cdcfe;
+}
+
+h3 {
+  margin-top: 25px;
+}
+
+table {
+  border-collapse: collapse;
+  margin-left: 10px;
+}
+
+tr:hover {
+  background: #343;
+  transition: 0.3s;
+}
+
+thead td {
+  font-weight: bold;
+  color: gold;
+}
+
+tbody {
+  color: #b5cea8;
+}
+
+td {
+  padding: 5px 15px;
+  border: 1px solid #ccc;
+  cursor: default;
+}
+
+td span {
+  color: #569cd6;
+}
+
+.container {
+  min-width: 450px;
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
 }

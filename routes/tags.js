@@ -14,12 +14,8 @@ router.get('/', (req, res) => {
 router.get('/search', (req, res) => {
   const filtered = tags.filter(tag => {
     return tag.name.indexOf(req.query.text) !== -1
-    // console.log(tag.name.indexOf('u') !== -1)
-    // return true
   })
 
-  console.log(req.query.text)
-  
   res.send(filtered)
 })
 
