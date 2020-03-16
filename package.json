@@ -4,8 +4,8 @@
   "description": "server for hashnote app with express",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server"
+    "start": "nodemon server",
+    "server": "nodemon server",
   },
   "author": "hamid",
   "license": "MIT",

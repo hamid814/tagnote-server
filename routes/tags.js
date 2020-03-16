@@ -9,9 +9,23 @@ router.get('/', (req, res) => {
   res.send(tags)
 })
 
-// @route    GET /tags/:id
+// @route    GET /tags/search
+// @desc     search tegs
+router.get('/search', (req, res) => {
+  const filtered = tags.filter(tag => {
+    return tag.name.indexOf(req.query.text) !== -1
+    // console.log(tag.name.indexOf('u') !== -1)
+    // return true
+  })
+
+  console.log(req.query.text)
+  
+  res.send(filtered)
+})
+
+// @route    GET /tags/id/:id
 // @desc     get single tag by id
-router.get('/:id', (req, res) => {
+router.get('/id/:id', (req, res) => {
   const tag = tags.filter(tag => tag.id === req.params.id)
   
   if(tag.length === 1) {

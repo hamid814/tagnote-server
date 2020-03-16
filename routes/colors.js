@@ -1,5 +1,5 @@
 const express = require('express')
-const colors = require('../db/colors.js')
+let colors = require('../db/colors.js')
 const shortid = require('shortid')
 
 const router = express.Router()
@@ -21,7 +21,10 @@ router.post('/', (req, res) => {
 
   colors = [...colors, newColor]
   
-  console.log(req.body)
+  ser.status(200).send({
+    status: 'success',
+    msg: 'color added'
+  })
 })
 
 module.exports = router;
