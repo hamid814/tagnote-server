@@ -1,5 +1,6 @@
 const express = require('express')
-const tags = require('../db/tags.js')
+let tags = require('../db/tags.js')
+const shortid = require('shortid')
 
 const router = express.Router()
 
@@ -35,6 +36,19 @@ router.get('/id/:id', (req, res) => {
       msg: 'internal server error'
     })
   }
+})
+
+// @route    POST /tags
+// @desc     add new tag
+router.post('/', (req, res) => {
+  const newTag = req.body
+
+  newTag.id = shortid.generate()
+  newTag.color = '#8886'
+
+  tags = [...tags, newTag]
+  
+  res.send(newTag)
 })
 
 module.exports = router;

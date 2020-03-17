@@ -1,7 +1,7 @@
 const tags = [
   {
     id: 'tag_id_1',
-    name: 'fun',  
+    name: 'fun',
     color: '#eeb82c',
     desc: 'tag 1 description',
   },
