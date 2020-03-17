@@ -1,5 +1,6 @@
 const express = require('express')
 let notes = require('../db/notes')
+const shortid = require('shortid')
 
 const router = express.Router()
 
@@ -45,7 +46,11 @@ router.get('/tag/:tagid', (req, res) => {
 // @route     POST /notes
 // @desc      add new note
 router.post('/', (req, res) => {
-  notes = [...notes, req.body]
+  const newNote = req.body
+
+  newNote.id = shortid.generate()
+  
+  notes = [...notes, newNote]
   
   res.send(req.body)
 })
