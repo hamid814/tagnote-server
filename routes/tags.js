@@ -44,7 +44,8 @@ router.post('/', (req, res) => {
   const newTag = req.body
 
   newTag.id = shortid.generate()
-  newTag.color = '#8886'
+  newTag.color = '#6c96'
+  newTag.desc = false
 
   tags = [...tags, newTag]
   
