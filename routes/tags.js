@@ -1,55 +1,40 @@
 const express = require('express')
 let tags = require('../db/tags.js')
 const shortid = require('shortid')
+const {
+  getTags,
+  getTag,
+  searchTags,
+  createTag,
+  deleteTag,
+  updateTag
+} = require('../controllers/tags')
 
 const router = express.Router()
 
-// @route    GET /tags
-// @desc     get all tags
-router.get('/', (req, res) => {
-  res.send(tags)
-})
-
 // @route    GET /tags/search
 // @desc     search tegs
-router.get('/search', (req, res) => {
-  const filtered = tags.filter(tag => {
-    return tag.name.indexOf(req.query.text) !== -1
-  })
+// router.get('/search', (req, res) => {
+//   const filtered = tags.filter(tag => {
+//     return tag.name.indexOf(req.query.text) !== -1
+//   })
 
-  res.send(filtered)
-})
+//   res.send(filtered)
+// })
 
-// @route    GET /tags/id/:id
-// @desc     get single tag by id
-router.get('/id/:id', (req, res) => {
-  const tag = tags.filter(tag => tag.id === req.params.id)
+router
+  .route('/')
+  .get(getTags)
+  .post(createTag)
+
+router
+  .route('/id/:id')
+  .get(getTag)
+  .delete(deleteTag)
+  .put(updateTag)
   
-  if(tag.length === 1) {
-    res.send(tag[0])
-  } else if(tag.length === 0) {
-    res.status(404).send({
-      msg: 'tag not found'
-    })
-  } else {
-    res.status(500).send({
-      msg: 'internal server error'
-    })
-  }
-})
-
-// @route    POST /tags
-// @desc     add new tag
-router.post('/', (req, res) => {
-  const newTag = req.body
-
-  newTag.id = shortid.generate()
-  newTag.color = '#6c96'
-  newTag.desc = false
-
-  tags = [...tags, newTag]
-  
-  res.send(newTag)
-})
+router
+  .route('/search')
+  .get(searchTags)
 
 module.exports = router;
