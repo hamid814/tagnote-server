@@ -28,7 +28,7 @@ router
   .post(createTag)
 
 router
-  .route('/id/:id')
+  .route('/:id')
   .get(getTag)
   .delete(deleteTag)
   .put(updateTag)

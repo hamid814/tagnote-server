@@ -1,118 +1,118 @@
 let notes = [
   {
     id: 'note_id_1',
-    text: 'text',
+    body: 'text',
     tags: {
-      primary: 'tag_id_1',
-      other: ['tag_id_5', 'tag_id_2']
+      primary: '5e80ae3786328f1254da1cad',
+      other: ['5e80ae3786328f1254da1cb1', '5e80ae3786328f1254da1cae']
     },
     date: 'date'
   },
   {
     id: 'note_id_2',
-    text: 'text number 2',
+    body: 'text number 2',
     tags: {
-      primary: 'tag_id_2',
-      other: ['tag_id_5', 'tag_id_4', 'tag_id_1']
+      primary: '5e80ae3786328f1254da1cae',
+      other: ['5e80ae3786328f1254da1cb1', '5e80ae3786328f1254da1cb0', '5e80ae3786328f1254da1cad']
     },
     date: 'date'
   },
   {
     id: 'note_id_3',
-    text: 'text for note 3',
+    body: 'text for note 3',
     tags: {
-      primary: 'tag_id_4',
-      other: ['tag_id_3', 'tag_id_2']
+      primary: '5e80ae3786328f1254da1cb0',
+      other: ['5e80ae3786328f1254da1caf', '5e80ae3786328f1254da1cae']
     },
     date: 'date'
   },
   {
     id: 'note_id_4',
-    text: '4th note text',
+    body: '4th note text',
     tags: {
-      primary: 'tag_id_4',
-      other: ['tag_id_6', 'tag_id_5']
+      primary: '5e80ae3786328f1254da1cb0',
+      other: ['5e80ae3786328f1254da1cb2', '5e80ae3786328f1254da1cb1']
     },
     date: 'date'
   },
   {
     id: 'note_id_5',
-    text: '5th note text',
+    body: '5th note text',
     tags: {
-      primary: 'tag_id_2',
-      other: ['tag_id_3', 'tag_id_1']
+      primary: '5e80ae3786328f1254da1cae',
+      other: ['5e80ae3786328f1254da1caf', '5e80ae3786328f1254da1cad']
     },
     date: 'date'
   },
   {
     id: 'note_id_6',
-    text: '6th note text goes here 6th note text goes here 6th note text goes here 6th note text goes here',
+    body: '6th note text goes here 6th note text goes here 6th note text goes here 6th note text goes here',
     tags: {
-      primary: 'tag_id_5',
-      other: ['tag_id_4', 'tag_id_3']
+      primary: '5e80ae3786328f1254da1cb1',
+      other: ['5e80ae3786328f1254da1cb0', '5e80ae3786328f1254da1caf']
     },
     date: 'date'
   },
   {
     id: 'note_id_7',
-    text: '7th note text goes here',
+    body: '7th note text goes here',
     tags: {
-      primary: 'tag_id_3',
-      other: ['tag_id_5', 'tag_id_4']
+      primary: '5e80ae3786328f1254da1caf',
+      other: ['5e80ae3786328f1254da1cb1', '5e80ae3786328f1254da1cb0']
     },
     date: 'date'
   },
   {
     id: 'note_id_8',
-    text: '8th note text goes here',
+    body: '8th note text goes here',
     tags: {
-      primary: 'tag_id_6',
-      other: ['tag_id_5', 'tag_id_3']
+      primary: '5e80ae3786328f1254da1cb2',
+      other: ['5e80ae3786328f1254da1cb1', '5e80ae3786328f1254da1caf']
     },
     date: 'date'
   },
   {
     id: 'note_id_9',
-    text: '9th note text goes here',
+    body: '9th note text goes here',
     tags: {
-      primary: 'tag_id_6',
-      other: ['tag_id_4', 'tag_id_2']
+      primary: '5e80ae3786328f1254da1cb2',
+      other: ['5e80ae3786328f1254da1cb0', '5e80ae3786328f1254da1cae']
     },
     date: 'date'
   },
   {
     id: 'note_id_10',
-    text: '10th note text goes here',
+    body: '10th note text goes here',
     tags: {
-      primary: 'tag_id_3',
-      other: ['tag_id_5', 'tag_id_1']
+      primary: '5e80ae3786328f1254da1caf',
+      other: ['5e80ae3786328f1254da1cb1', '5e80ae3786328f1254da1cad']
     },
     date: 'date'
   },
   {
     id: 'note_id_11',
-    text: '11th note text goes here 11th note text goes here 11th note text goes here',
+    body: '11th note text goes here 11th note text goes here 11th note text goes here',
     tags: {
-      primary: 'tag_id_5',
-      other: ['tag_id_4', 'tag_id_2']
+      primary: '5e80ae3786328f1254da1cb1',
+      other: ['5e80ae3786328f1254da1cb0', '5e80ae3786328f1254da1cae']
     },
     date: 'date'
   },
   {
     id: 'note_id_12',
-    text: '12th note text goes here',
+    body: '12th note text goes here',
     tags: {
-      primary: 'tag_id_6',
-      other: ['tag_id_5', 'tag_id_4']
+      primary: '5e80ae3786328f1254da1cb2',
+      other: ['5e80ae3786328f1254da1cb1', '5e80ae3786328f1254da1cb0']
     },
     date: 'date'
   },
   {
     id: 'note_id_13',
-    text: '13th note text goes here',
+    body: '13th note text goes here',
     tags: {
-      primary: 'tag_id_4',
-      other: ['tag_id_3', 'tag_id_2']
+      primary: '5e80ae3786328f1254da1cb0',
+      other: ['5e80ae3786328f1254da1caf', '5e80ae3786328f1254da1cae']
     },
     date: 'date'
   }
