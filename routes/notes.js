@@ -1,14 +1,26 @@
 const express = require('express')
 let notes = require('../db/notes')
 const shortid = require('shortid')
-
+const {
+  getNotes,
+  getNote,
+  addNote,
+  editNote,
+  deleteNote
+} = require('../controllers/notes')
 const router = express.Router()
 
-// @route    GET /notes 
-// @desc     get all notes
-router.get('/', (req, res) => {
-  res.send(notes)
-})
+router
+  .route('/')
+  .get(getNotes)
+  .post(addNote)
+
+router
+  .route('/:id')
+  .get(getNote)
+  .put(editNote)
+  .delete(deleteNote)
+
 
 // @route    GET /notes/id/:id
 // @desc     get single note with id
@@ -45,14 +57,14 @@ router.get('/tag/:tagid', (req, res) => {
 
 // @route     POST /notes
 // @desc      add new note
-router.post('/', (req, res) => {
-  const newNote = req.body
+// router.post('/', (req, res) => {
+//   const newNote = req.body
 
-  newNote.id = shortid.generate()
+//   newNote.id = shortid.generate()
   
-  notes = [...notes, newNote]
+//   notes = [...notes, newNote]
   
-  res.send(req.body)
-})
+//   res.send(req.body)
+// })
 
 module.exports = router

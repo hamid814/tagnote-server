@@ -65,5 +65,14 @@ exports.updateTag = (req, res, next) => {
   add tag
   edit tag
   search tags
+  
+  get notes
+  get notes with tag
+  get note with id
+  add note 
+  delete note
+  edit note
+
+  notes with a tag
 
 */
