@@ -7,6 +7,10 @@ const morgan = require('morgan')
 const tags = require('./db/tags.js')
 const notes = require('./db/notes.js')
 const connectDB = require('./config/db')
+const errorHandler = require('./middleware/errorHandler')
+
+// Test files and be deleted after development
+const logger = require('./middleware/logger')
 
 // Initialize express
 const app = express()
@@ -25,6 +29,11 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+// for testing and development purpeses Only
+if (process.env.NODE_ENV === 'development') {
+  app.use(logger);
+}
+
 // add static files
 app.use(express.static('public'))
 
@@ -34,11 +43,12 @@ app.use('/api/v1/notes', require('./routes/notes'))
 app.use('/colors', require('./routes/colors'))
 app.use('/test', require('./routes/test'))
 
+// use custom error handler
+app.use(errorHandler)
+
 // My personal ntoes
 const works = [
-  'add /api to all routes',
   'add controllers to client-side',
-  'correct routes endpoints',
   'search for tags route',
   'note model is incomplete',
   'note update route is incompelete',
@@ -56,7 +66,7 @@ const PORT = process.env.PORT || 5000
 const server = app.listen(
   PORT,
   console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.cyan.inverse
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.gray.underline
   )
 );
 
