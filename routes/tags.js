@@ -28,13 +28,15 @@ router
   .post(createTag)
 
 router
+  .route('/search')
+  .get(searchTags)
+
+router
   .route('/:id')
   .get(getTag)
   .delete(deleteTag)
   .put(updateTag)
   
-router
-  .route('/search')
-  .get(searchTags)
+
 
 module.exports = router;
