@@ -23,7 +23,7 @@ const notes = require('./db/notes');
 // Import into DB
 const importData = async () => {
   try {
-    await Tag.create(tags);
+    // await Tag.create(tags);
     await Note.create(notes);
     console.log('Data Imported...'.green.inverse);
     process.exit();
@@ -35,7 +35,7 @@ const importData = async () => {
 // Delete data
 const deleteData = async () => {
   try {
-    await Tag.deleteMany();
+    // await Tag.deleteMany();
     await Note.deleteMany();
     console.log('Data Destroyed...'.red.inverse);
     process.exit();
