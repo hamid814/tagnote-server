@@ -5,7 +5,7 @@ const ErrorResposne = require('../utils/errorResponse')
 // @route    GET /api/v1/notes
 // @desc     get all notes
 exports.getNotes = asyncHandler(async (req, res, next) => {
-  const notes = await Note.find();
+  const notes = await Note.find().populate('tag');
 
   res.status(200).json({
     success: true,
@@ -35,8 +35,6 @@ exports.getNote = asyncHandler(async (req, res, next) => {
 // @desc       add a note
 exports.addNote = asyncHandler(async (req, res, next) => {
   const note = await Note.create(req.body);
-
-  console.log(req.body)
 
   res.status(201).json({
     success: true,

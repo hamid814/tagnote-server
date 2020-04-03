@@ -12,6 +12,11 @@ const NoteSchema = new mongoose.Schema({
       reqired: [true, 'note must have a primary tag']
     },
     other: [String]
+  },
+  tag: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Tag',
+    required: true
   }
 })
 
