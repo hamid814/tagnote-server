@@ -1,0 +1,5 @@
+[Sat, 04 Apr 2020 10:46:56 GMT] -- ["GET"] -- ["/api/v1/tags/5e821da30215e5390c6e9a54"] -- [200] -- [application/json; charset=utf-8] -- [203.307 ms]
+[Sat, 04 Apr 2020 10:47:22 GMT] -- ["GET"] -- ["/api/v1/tags/5e821da30215e5390c6e9a54"] -- [200] -- [application/json; charset=utf-8, 144] -- [209.787 ms]
+[Sat, 04 Apr 2020 10:47:45 GMT] -- ["GET"] -- ["/api/v1/tags/5e821da30215e5390c6e9a54"] -- [200] -- [application/json; charset=utf-8, 144 bite(s)] -- [545.236 ms]
+[Sat, 04 Apr 2020 10:48:22 GMT] -- ["POST"] -- ["/api/v1/notes"] -- [500] -- [application/json; charset=utf-8, 80 bite(s)] -- [19.080 ms]
+[Sat, 04 Apr 2020 10:49:01 GMT] -- ["POST"] -- ["/api/v1/notes"] -- [500] -- [application/json; charset=utf-8, 111 bite(s)] -- [7.232 ms]

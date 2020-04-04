@@ -1,9 +1,12 @@
-// js modules
+// Node modules
+const fs = require('fs')
+const path = require('path')
+// Js modules
 const express = require('express')
 const colors = require('colors')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
-//my files
+// My files
 const tags = require('./db/tags.js')
 const notes = require('./db/notes.js')
 const connectDB = require('./config/db')
@@ -26,13 +29,20 @@ app.use(express.json({ extended: false }))
 
 // dev logger
 if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
+  app.use(morgan('dev', {
+    skip: function(req, res) { return req.url == '/favicon.ico' }
+  }));
 }
 
-// for testing and development purpeses Only
-if (process.env.NODE_ENV === 'development') {
-  app.use(logger);
-}
+// Create a write stream (in append mode)
+var logsFile = fs.createWriteStream(path.join(__dirname, 'logs', 'reqHistory.txt'), { flags: 'a' })
+
+// Setup a logger for all reqs
+app.use(morgan('[:date] -- [":method"] -- [":url"] -- [:status] -- [:res[content-type], :res[content-length] bite(s)] -- [:response-time ms]', { stream: logsFile }))
+// app.use(morgan('combined', { stream: logsFile }))
+
+// logger for testings
+app.use(logger);
 
 // add static files
 app.use(express.static('public'))
