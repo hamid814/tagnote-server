@@ -41,3 +41,5 @@
 [Sat, 04 Apr 2020 11:21:23 GMT] -- ["GET"] -- ["/api/v1/tags"] -- [200] -- [application/json; charset=utf-8, 785 bite(s)] -- [198.961 ms] -- [PostmanRuntime/7.24.0]
 [Sat, 04 Apr 2020 11:22:46 GMT] -- ["GET"] -- ["/api/v1/notes"] -- [200] -- [application/json; charset=utf-8, 36 bite(s)] -- [189.416 ms] -- [PostmanRuntime/7.24.0]
 [Sat, 04 Apr 2020 11:22:49 GMT] -- ["GET"] -- ["/api/v1/tags"] -- [200] -- [application/json; charset=utf-8, 785 bite(s)] -- [183.104 ms] -- [PostmanRuntime/7.24.0]
+[Sat, 04 Apr 2020 11:23:39 GMT] -- ["GET"] -- ["/api/v1/notes"] -- [200] -- [application/json; charset=utf-8, 4201 bite(s)] -- [387.660 ms] -- [PostmanRuntime/7.24.0]
+[Sat, 04 Apr 2020 11:30:57 GMT] -- ["GET"] -- ["/api/v1/notes/5e80a7702365020aec69c9d0"] -- [404] -- [application/json; charset=utf-8, 68 bite(s)] -- [1369.862 ms] -- [PostmanRuntime/7.24.0]
