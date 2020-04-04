@@ -5,19 +5,19 @@ const NoteSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please Enter a body text']
   },
-  tags: {
-    type: Object,
-    primary: {
-      type: String,
-      reqired: [true, 'note must have a primary tag']
-    },
-    other: [String]
-  },
   tag: {
     type: mongoose.Schema.ObjectId,
     ref: 'Tag',
     required: true
-  }
+  },
+  // otherTags: {
+  //   type: [mongoose.Schema.ObjectId],
+  //   ref: 'tag'
+  // }
+  otherTags: [{
+    type: mongoose.Schema.ObjectId,
+    ref: 'Tag'
+  }]
 })
 
 module.exports = mongoose.model('Note', NoteSchema)
