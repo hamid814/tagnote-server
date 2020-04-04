@@ -17,7 +17,10 @@ exports.getNotes = asyncHandler(async (req, res, next) => {
 // @route     GET /api/v1/notes/:id
 // @desc      Get a single note
 exports.getNote = asyncHandler(async (req, res, next) => {
-  const note = await Note.findById(req.params.id);
+  const note = await Note.findById(req.params.id).populate({
+    path: 'tag',
+    select: 'name color'
+  });
 
   if(!note) {
     return next(
