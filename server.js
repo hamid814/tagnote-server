@@ -34,12 +34,16 @@ if (process.env.NODE_ENV === 'development') {
   }));
 }
 
-// Create a write stream (in append mode)
+// Create a write stream (in append mode) ( for logging reqs )
 var logsFile = fs.createWriteStream(path.join(__dirname, 'logs', 'reqHistory.txt'), { flags: 'a' })
 
 // Setup a logger for all reqs
-app.use(morgan('[:date] -- [":method"] -- [":url"] -- [:status] -- [:res[content-type], :res[content-length] bite(s)] -- [:response-time ms]', { stream: logsFile }))
-// app.use(morgan('combined', { stream: logsFile }))
+app.use(morgan(process.env.LOG_PATTERN, {
+  stream: logsFile,
+  skip: function(req, res) {
+    return req.url == '/favicon.ico'
+  }
+}))
 
 // logger for testings
 app.use(logger);
