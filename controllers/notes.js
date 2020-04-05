@@ -5,7 +5,17 @@ const ErrorResposne = require('../utils/errorResponse')
 // @route    GET /api/v1/notes
 // @desc     get all notes
 exports.getNotes = asyncHandler(async (req, res, next) => {
-  const notes = await Note.find().populate('tag');
+  const tagPopulate = {
+    path: 'tag',
+    select: 'name color'
+  }
+
+  const otherTagsPopulate = {
+    path: 'otherTags',
+    select: 'name color'
+  }
+  
+  const notes = await Note.find().populate(tagPopulate).populate(otherTagsPopulate);
 
   res.status(200).json({
     success: true,
@@ -26,6 +36,7 @@ exports.getNote = asyncHandler(async (req, res, next) => {
     path: 'otherTags',
     select: 'name color'
   }
+  
   const note = await Note.findById(req.params.id).populate(tagPopulate).populate(otherTagsPopulate);
 
   if(!note) {
