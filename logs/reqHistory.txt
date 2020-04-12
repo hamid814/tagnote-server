@@ -762,3 +762,4 @@
 [Fri, 10 Apr 2020 09:31:23 GMT] -- ["GET"] -- ["/robots.txt"] -- [404] -- [text/html; charset=utf-8, 149 bite(s)] -- [0.604 ms] -- [Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36]
 [Fri, 10 Apr 2020 09:31:33 GMT] -- ["GET"] -- ["/api/v1/tags"] -- [200] -- [application/json; charset=utf-8, 785 bite(s)] -- [201.024 ms] -- [Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36]
 [Fri, 10 Apr 2020 09:35:04 GMT] -- ["GET"] -- ["/api/v1/tags/5e821da30215e5390c6e9a55"] -- [200] -- [application/json; charset=utf-8, 148 bite(s)] -- [270.404 ms] -- [Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36]
+[Sat, 11 Apr 2020 17:46:05 GMT] -- ["GET"] -- ["/"] -- [200] -- [text/html; charset=UTF-8, 2522 bite(s)] -- [63.336 ms] -- [PostmanRuntime/7.24.1]
