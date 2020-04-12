@@ -10,10 +10,6 @@ const NoteSchema = new mongoose.Schema({
     ref: 'Tag',
     required: true
   },
-  // otherTags: {
-  //   type: [mongoose.Schema.ObjectId],
-  //   ref: 'tag'
-  // }
   otherTags: [{
     type: mongoose.Schema.ObjectId,
     ref: 'Tag'
