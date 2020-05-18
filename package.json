@@ -1,7 +1,7 @@
 {
-  "name": "hashnote-server",
+  "name": "tagnote-server",
   "version": "1.0.0",
-  "description": "server for hashnote app with express",
+  "description": "server for tagnote app with express",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server",
