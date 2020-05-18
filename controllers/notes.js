@@ -1,26 +1,28 @@
 const Note = require('../models/Note');
-const asyncHandler = require('../middleware/asyncHandler')
-const ErrorResposne = require('../utils/errorResponse')
+const asyncHandler = require('../middleware/asyncHandler');
+const ErrorResposne = require('../utils/errorResponse');
 
 // @route    GET /api/v1/notes
 // @desc     get all notes
 exports.getNotes = asyncHandler(async (req, res, next) => {
   const tagPopulate = {
     path: 'tag',
-    select: 'name color'
-  }
+    select: 'name color',
+  };
 
   const otherTagsPopulate = {
     path: 'otherTags',
-    select: 'name color'
-  }
-  
-  const notes = await Note.find().populate(tagPopulate).populate(otherTagsPopulate);
+    select: 'name color',
+  };
+
+  const notes = await Note.find()
+    .populate(tagPopulate)
+    .populate(otherTagsPopulate);
 
   res.status(200).json({
     success: true,
     count: notes.length,
-    data: notes
+    data: notes,
   });
 });
 
@@ -29,36 +31,50 @@ exports.getNotes = asyncHandler(async (req, res, next) => {
 exports.getNote = asyncHandler(async (req, res, next) => {
   const tagPopulate = {
     path: 'tag',
-    select: 'name color'
-  }
+    select: 'name color',
+  };
 
   const otherTagsPopulate = {
     path: 'otherTags',
-    select: 'name color'
-  }
-  
-  const note = await Note.findById(req.params.id).populate(tagPopulate).populate(otherTagsPopulate);
+    select: 'name color',
+  };
 
-  if(!note) {
-    return next(
-      new ErrorResposne(`No note with id ${req.params.id}`, 404)
-    )
+  const note = await Note.findById(req.params.id)
+    .populate(tagPopulate)
+    .populate(otherTagsPopulate);
+
+  if (!note) {
+    return next(new ErrorResposne(`No note with id ${req.params.id}`, 404));
   }
 
   res.status(200).json({
     success: true,
-    data: note
+    data: note,
   });
 });
 
-// @route      POST /api/v1/notes 
+// @route      POST /api/v1/notes
 // @desc       add a note
 exports.addNote = asyncHandler(async (req, res, next) => {
-  const note = await Note.create(req.body);
+  const tagPopulate = {
+    path: 'tag',
+    select: 'name color',
+  };
+
+  const otherTagsPopulate = {
+    path: 'otherTags',
+    select: 'name color',
+  };
+
+  const newNote = await Note.create(req.body);
+
+  const note = await Note.findById(newNote._id)
+    .populate(tagPopulate)
+    .populate(otherTagsPopulate);
 
   res.status(201).json({
     success: true,
-    data: note
+    data: note,
   });
 });
 
@@ -75,16 +91,14 @@ exports.editNote = asyncHandler(async (req, res, next) => {
 exports.deleteNote = asyncHandler(async (req, res, next) => {
   const note = await Note.findById(req.params.id);
 
-  if(!note) {
-    return next(
-      new ErrorResposne(`No note with id of ${req.params.id}`, 404)
-    )
+  if (!note) {
+    return next(new ErrorResposne(`No note with id of ${req.params.id}`, 404));
   }
 
   note.remove();
 
   res.status(200).json({
     success: true,
-    data: {}
+    data: {},
   });
 });
