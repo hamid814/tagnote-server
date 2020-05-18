@@ -1,4 +1,5 @@
 const Tag = require('../models/Tag');
+const Note = require('../models/Note');
 const asyncHandler = require('../middleware/asyncHandler');
 const ErrorResposne = require('../utils/errorResponse');
 
@@ -34,6 +35,42 @@ exports.getTag = asyncHandler(async (req, res, next) => {
   res.send({
     success: true,
     data: tag,
+  });
+});
+
+// @route     GET /api/v1/tags/:tagId/notes
+// @desc      get a single tag and its notes
+exports.getTagAndNotes = asyncHandler(async (req, res, next) => {
+  const tag = await Tag.findById(req.params.tagId);
+
+  const notes = await Note.find({ tag: req.params.tagId })
+    .populate({
+      path: 'tag',
+      select: 'name color',
+    })
+    .populate({
+      path: 'otherTags',
+      select: 'name color',
+    });
+  const otherNotes = await Note.find({
+    otherTags: { $in: [req.params.tagId] },
+  })
+    .populate({
+      path: 'tag',
+      select: 'name color',
+    })
+    .populate({
+      path: 'otherTags',
+      select: 'name color',
+    });
+
+  res.status(200).json({
+    success: true,
+    data: {
+      tag,
+      notes,
+      otherNotes,
+    },
   });
 });
 
