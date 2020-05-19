@@ -1,132 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link rel="icon" href="favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Hashnote Api</title>
-</head>
-<body>
-  
-  <h1>
-    HashNote Api Documentation
-  </h1>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Tagnote Api</title>
+  </head>
+  <body>
+    <h1>
+      TagNote Api Documentation
+    </h1>
 
-  <div class="container">
-    <h2>Details</h2>
-    
-    JSON and stuff
-    
-    <h2>
-      Routes
-    </h2>
-    
-    <h3>
-      Notes
-    </h3>
-    <table>
-      <thead>
-        <td>
-          route
-        </td>
-        <td>
-          method
-        </td>
-        <td>
-          response
-        </td>
-      </thead>
-      <tr>
-        <td>/notes</td>
-        <td>GET</td>
-        <td>all notes</td>
-      </tr>
-      <tr>
-        <td>/notes/id/:id</td>
-        <td>GET</td>
-        <td>note with certain id</td>
-      </tr>
-      <tr>
-        <td>/notes/tag/:tagid</td>
-        <td>GET</td>
-        <td>notes with certain tag</td>
-      </tr>
-      <tr>
-        <td>/notes</td>
-        <td>POST</td>
-        <td>add note</td>
-      </tr>
-    </table>
-    
-    <h3>
-      Tags
-    </h3>
-    <table>
-      <thead>
-        <td>
-          route
-        </td>
-        <td>
-          method
-        </td>
-        <td>
-          response
-        </td>
-      </thead>
-      <tr>
-        <td>/tags</td>
-        <td>GET</td>
-        <td>all tags</td>
-      </tr>
-      <tr>
-        <td>/tags/id/:id</td>
-        <td>GET</td>
-        <td>tag with certain id</td>
-      </tr>
-      <tr>
-        <td>/tags/search?text=<span>{text}</span></td>
-        <td>GET</td>
-        <td>search tags by name and descprition</td>
-      </tr>
-      <tr>
-        <td>/tags</td>
-        <td>POST</td>
-        <td>add tag</td>
-      </tr>
-    </table>
-    
-    <h3>
-      Colors
-    </h3>
-    <table>
-      <thead>
-        <td>
-          route
-        </td>
-        <td>
-          method
-        </td>
-        <td>
-          response
-        </td>
-      </thead>
-      <tr>
-        <td>/colors</td>
-        <td>GET</td>
-        <td>all colors</td>
-      </tr>
-      <tr>
-        <td>/colors</td>
-        <td>POST</td>
-        <td>add color</td>
-      </tr>
-    </table>
-    
-  </div>
-  <div class="footer">
-    &copy;<script>document.write(new Date().getYear() + 1900)</script> <a href="https://github.com/hamid814" target="_blank">hamid814</a>
-  </div>
-  <script src="app.js"></script>
-</body>
+    <div class="container">
+      <h2>Details</h2>
+
+      JSON and stuff
+
+      <h2>
+        Routes
+      </h2>
+
+      <h3>
+        Notes
+      </h3>
+      <table>
+        <thead>
+          <td>
+            route
+          </td>
+          <td>
+            method
+          </td>
+          <td>
+            response
+          </td>
+        </thead>
+        <tr>
+          <td>/notes</td>
+          <td>GET</td>
+          <td>all notes</td>
+        </tr>
+        <tr>
+          <td>/notes/id/:id</td>
+          <td>GET</td>
+          <td>note with certain id</td>
+        </tr>
+        <tr>
+          <td>/notes/tag/:tagid</td>
+          <td>GET</td>
+          <td>notes with certain tag</td>
+        </tr>
+        <tr>
+          <td>/notes</td>
+          <td>POST</td>
+          <td>add note</td>
+        </tr>
+      </table>
+
+      <h3>
+        Tags
+      </h3>
+      <table>
+        <thead>
+          <td>
+            route
+          </td>
+          <td>
+            method
+          </td>
+          <td>
+            response
+          </td>
+        </thead>
+        <tr>
+          <td>/tags</td>
+          <td>GET</td>
+          <td>all tags</td>
+        </tr>
+        <tr>
+          <td>/tags/id/:id</td>
+          <td>GET</td>
+          <td>tag with certain id</td>
+        </tr>
+        <tr>
+          <td>/tags/search?text=<span>{text}</span></td>
+          <td>GET</td>
+          <td>search tags by name and descprition</td>
+        </tr>
+        <tr>
+          <td>/tags</td>
+          <td>POST</td>
+          <td>add tag</td>
+        </tr>
+      </table>
+
+      <h3>
+        Colors
+      </h3>
+      <table>
+        <thead>
+          <td>
+            route
+          </td>
+          <td>
+            method
+          </td>
+          <td>
+            response
+          </td>
+        </thead>
+        <tr>
+          <td>/colors</td>
+          <td>GET</td>
+          <td>all colors</td>
+        </tr>
+        <tr>
+          <td>/colors</td>
+          <td>POST</td>
+          <td>add color</td>
+        </tr>
+      </table>
+    </div>
+    <div class="footer">
+      &copy;
+      <script>
+        document.write(new Date().getYear() + 1900);
+      </script>
+      <a href="https://github.com/hamid814" target="_blank">hamid814</a>
+    </div>
+    <script src="app.js"></script>
+  </body>
 </html>

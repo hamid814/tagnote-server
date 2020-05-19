@@ -72,11 +72,9 @@ app.use(errorHandler);
 // My personal ntoes
 const works = [
   'add controllers to client-side',
-  'search for tags route',
   'note model is incomplete',
   'note update route is incompelete',
   'is tag description required?',
-  'add date to Note Model',
   'add populate to note create',
   'add note ot top of the list in mongodb',
   'in errorHandler must send an array of messages always to control it on the frons easily (in errorRespose it must be conrolled i think)',
