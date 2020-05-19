@@ -16,6 +16,10 @@ const NoteSchema = new mongoose.Schema({
       ref: 'Tag',
     },
   ],
+  date: {
+    type: Date,
+    default: new Date(),
+  },
 });
 
 module.exports = mongoose.model('Note', NoteSchema);
