@@ -81,9 +81,31 @@ exports.addNote = asyncHandler(async (req, res, next) => {
 // @route      PUT /api/v1/note/:id
 // @desc       edit a specific note
 exports.editNote = asyncHandler(async (req, res, next) => {
-  const note = await Note.findById(req.params.id);
+  let note = await Note.findById(req.params.id);
 
-  res.send(`update note with id ${req.params.id}`);
+  if (!note) {
+    return next(new ErrorResposne('Note not found', 404));
+  }
+
+  delete req.body._id;
+
+  note = await Note.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  })
+    .populate({
+      path: 'tag',
+      select: 'name color',
+    })
+    .populate({
+      path: 'otherTags',
+      select: 'name color',
+    });
+
+  res.status(200).json({
+    success: true,
+    data: note,
+  });
 });
 
 // @route      DELETE /api/v1/note/:id
