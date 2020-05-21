@@ -39,32 +39,44 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Create a write stream (in append mode) ( for logging reqs )
-var logsFile = fs.createWriteStream(
-  path.join(__dirname, 'logs', 'reqHistory.txt'),
-  { flags: 'a' }
-);
+let logFiles;
+
+if (process.env.NODE_ENV === 'development') {
+  var logsFile = fs.createWriteStream(
+    path.join(__dirname, 'logs', 'reqHistory.txt'),
+    { flags: 'a' }
+  );
+}
 
 // Setup a logger for all reqs
-app.use(
-  morgan(process.env.LOG_PATTERN, {
-    stream: logsFile,
-    skip: function (req, res) {
-      return req.url == '/favicon.ico';
-    },
-  })
-);
+if (process.env.NODE_ENV === 'development') {
+  app.use(
+    morgan(process.env.LOG_PATTERN, {
+      stream: logsFile,
+      skip: function (req, res) {
+        return req.url == '/favicon.ico';
+      },
+    })
+  );
+}
 
 // logger for testings
 app.use(logger);
-
-// add static files
-app.use(express.static('public'));
 
 // Routes
 app.use('/api/v1/tags', require('./routes/tags'));
 app.use('/api/v1/notes', require('./routes/notes'));
 app.use('/colors', require('./routes/colors'));
 app.use('/test', require('./routes/test'));
+
+// serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 // use custom error handler
 app.use(errorHandler);
