@@ -23,7 +23,7 @@ const errorHandler = (err, req, res, next) => {
 
   // cast error
   if (error.name === 'CastError') {
-    const message = 'resurce note found';
+    const message = 'Id is not valid';
     error = new ErrorResponse(message, 400);
   }
 
