@@ -66,6 +66,7 @@ app.use(logger);
 // Routes
 app.use('/api/v1/tags', require('./routes/tags'));
 app.use('/api/v1/notes', require('./routes/notes'));
+app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/colors', require('./routes/colors'));
 app.use('/test', require('./routes/test'));
 
