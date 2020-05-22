@@ -1,5 +1,5 @@
 const express = require('express');
-let tags = require('../db/tags.js');
+const { protect } = require('../middleware/auth');
 const shortid = require('shortid');
 const {
   getTags,
@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.route('/').get(getTags).post(createTag);
 
-router.route('/:id').get(getTag).delete(deleteTag).put(updateTag);
+router.route('/:id').get(getTag).delete(protect, deleteTag).put(updateTag);
 
 router.route('/:tagId/notes').get(getTagAndNotes);
 
