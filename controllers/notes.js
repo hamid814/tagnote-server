@@ -78,7 +78,7 @@ exports.addNote = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @route      PUT /api/v1/note/:id
+// @route      PUT /api/v1/notes/:id
 // @desc       edit a specific note
 exports.editNote = asyncHandler(async (req, res, next) => {
   let note = await Note.findById(req.params.id);
@@ -108,7 +108,7 @@ exports.editNote = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @route      DELETE /api/v1/note/:id
+// @route      DELETE /api/v1/notes/:id
 // @desc       delete a specific note
 exports.deleteNote = asyncHandler(async (req, res, next) => {
   const note = await Note.findById(req.params.id);
@@ -118,6 +118,17 @@ exports.deleteNote = asyncHandler(async (req, res, next) => {
   }
 
   note.remove();
+
+  res.status(200).json({
+    success: true,
+    data: {},
+  });
+});
+
+// @route      DELETE /api/v1/notes/deletemany
+// @desc       delete many notes with id
+exports.deleteMany = asyncHandler(async (req, res, next) => {
+  await Note.deleteMany({ _id: [...req.body.ids] });
 
   res.status(200).json({
     success: true,

@@ -4,6 +4,7 @@ const NoteSchema = new mongoose.Schema({
   body: {
     type: String,
     required: [true, 'Please Enter a body text'],
+    unique: false,
   },
   tag: {
     type: mongoose.Schema.ObjectId,
