@@ -6,10 +6,13 @@ const {
   addNote,
   editNote,
   deleteNote,
+  deleteMany,
 } = require('../controllers/notes');
 const router = express.Router();
 
 router.route('/').get(getNotes).post(addNote);
+
+router.route('/deletemany').delete(deleteMany);
 
 router
   .route('/:id')
