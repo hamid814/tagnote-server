@@ -1,5 +1,5 @@
 const express = require('express');
-const { protect } = require('../middleware/auth');
+const { protect, checkUser } = require('../middleware/auth');
 const {
   getNotes,
   getNote,
@@ -10,9 +10,9 @@ const {
 } = require('../controllers/notes');
 const router = express.Router();
 
-router.route('/').get(getNotes).post(addNote);
+router.route('/').get(getNotes).post(checkUser, addNote);
 
-router.route('/deletemany').delete(deleteMany);
+router.route('/deletemany').delete(protect, deleteMany);
 
 router
   .route('/:id')
