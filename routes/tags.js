@@ -16,6 +16,6 @@ router.route('/').get(getTags).post(createTag);
 
 router.route('/:id').get(getTag).delete(protect, deleteTag).put(updateTag);
 
-router.route('/:tagId/notes').get(getTagAndNotes);
+router.route('/:slug/notes').get(getTagAndNotes);
 
 module.exports = router;

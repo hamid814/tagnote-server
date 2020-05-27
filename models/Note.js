@@ -17,6 +17,11 @@ const NoteSchema = new mongoose.Schema({
       ref: 'Tag',
     },
   ],
+  byGuest: Boolean,
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+  },
   date: {
     type: Date,
     default: new Date(),
