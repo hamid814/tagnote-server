@@ -1,7 +1,7 @@
 const Tag = require('../models/Tag');
 const Note = require('../models/Note');
 const asyncHandler = require('../middleware/asyncHandler');
-const ErrorResposne = require('../utils/errorResponse');
+const ErrorResponse = require('../utils/errorResponse');
 
 // @route     GET /api/v1/tags
 // @desc      get all tags
@@ -29,7 +29,7 @@ exports.getTag = asyncHandler(async (req, res, next) => {
   const tag = await Tag.findById(req.params.id);
 
   if (!tag) {
-    return next(new ErrorResposne(`No tag with id ${req.params.id}`, 404));
+    return next(new ErrorResponse(`No tag with id ${req.params.id}`, 404));
   }
 
   res.send({
@@ -38,30 +38,34 @@ exports.getTag = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @route     GET /api/v1/tags/:tagId/notes
+// @route     GET /api/v1/tags/:slug/notes
 // @desc      get a single tag and its notes
 exports.getTagAndNotes = asyncHandler(async (req, res, next) => {
-  const tag = await Tag.findById(req.params.tagId);
+  const tag = await Tag.findOne({ slug: req.params.slug });
 
-  const notes = await Note.find({ tag: req.params.tagId })
+  if (!tag) {
+    return next(new ErrorResponse('tag not found', 404));
+  }
+
+  const notes = await Note.find({ tag: tag._id })
     .populate({
       path: 'tag',
-      select: 'name color',
+      select: 'name color slug',
     })
     .populate({
       path: 'otherTags',
-      select: 'name color',
+      select: 'name color slug',
     });
   const otherNotes = await Note.find({
-    otherTags: { $in: [req.params.tagId] },
+    otherTags: { $in: [tag._id] },
   })
     .populate({
       path: 'tag',
-      select: 'name color',
+      select: 'name color slug',
     })
     .populate({
       path: 'otherTags',
-      select: 'name color',
+      select: 'name color slug',
     });
 
   res.status(200).json({
@@ -91,7 +95,7 @@ exports.deleteTag = asyncHandler(async (req, res, next) => {
   const tag = await Tag.findById(req.params.id);
 
   if (!tag) {
-    return next(new ErrorResposne(`No tag with id ${req.params.id}`, 404));
+    return next(new ErrorResponse(`No tag with id ${req.params.id}`, 404));
   }
 
   tag.remove();
@@ -104,23 +108,3 @@ exports.deleteTag = asyncHandler(async (req, res, next) => {
 exports.updateTag = asyncHandler(async (req, res, next) => {
   res.send('update tag');
 });
-
-/*
-
-  get all tags
-  gat single tag
-  delete tag
-  add tag
-  edit tag
-  search tags
-  
-  get notes
-  get notes with tag
-  get note with id
-  add note 
-  delete note
-  edit note
-
-  notes with a tag
-
-*/

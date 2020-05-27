@@ -22,10 +22,15 @@ const tags = require('./db/tags');
 const notes = require('./db/notes');
 
 // Import into DB
-const importData = async () => {
+const importData = async (text) => {
+  const notesWithNewBody = notes.map((note) => ({
+    ...note,
+    body: text + ' ' + note.body,
+  }));
+
   try {
     // await Tag.create(tags);
-    await Note.create(notes);
+    await Note.create(notesWithNewBody);
     console.log('Data Imported...'.green.inverse);
     process.exit();
   } catch (err) {
@@ -47,7 +52,7 @@ const deleteData = async () => {
 };
 
 if (process.argv[2] === '-i') {
-  importData();
+  importData(process.argv[3]);
 } else if (process.argv[2] === '-d') {
   deleteData();
 }
