@@ -92,6 +92,7 @@ const works = [
   'add note ot top of the list in mongodb',
   'in errorHandler must send an array of messages always to control it on the frons easily (in errorRespose it must be conrolled i think)',
   'delete note must not delet it forever, it must be added to deleted collection ( and to bringing back in possible! )',
+  'advancedresults doesnt contain req.query',
 ];
 
 // Log my personal Notes
