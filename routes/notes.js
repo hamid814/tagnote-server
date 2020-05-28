@@ -1,5 +1,8 @@
 const express = require('express');
+const Note = require('../models/Note');
 const { protect, checkUser } = require('../middleware/auth');
+const { beforeAdd } = require('../middleware/notes');
+const advancedResults = require('../middleware/advancedResults');
 const {
   getNotes,
   getNote,
@@ -10,7 +13,16 @@ const {
 } = require('../controllers/notes');
 const router = express.Router();
 
-router.route('/').get(getNotes).post(checkUser, addNote);
+router
+  .route('/')
+  .get(
+    advancedResults(Note, [
+      JSON.parse(process.env.TAG_POPULATE),
+      JSON.parse(process.env.OTHER_TAGS_POPULATE),
+    ]),
+    getNotes
+  )
+  .post([beforeAdd, checkUser], addNote);
 
 router.route('/deletemany').delete(protect, deleteMany);
 
