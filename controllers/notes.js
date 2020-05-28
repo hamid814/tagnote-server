@@ -5,43 +5,15 @@ const ErrorResponse = require('../utils/errorResponse');
 // @route    GET /api/v1/notes
 // @desc     get all notes
 exports.getNotes = asyncHandler(async (req, res, next) => {
-  const tagPopulate = {
-    path: 'tag',
-    select: 'name color slug',
-  };
-
-  const otherTagsPopulate = {
-    path: 'otherTags',
-    select: 'name color slug',
-  };
-
-  const notes = await Note.find()
-    .populate(tagPopulate)
-    .populate(otherTagsPopulate);
-
-  res.status(200).json({
-    success: true,
-    count: notes.length,
-    data: notes,
-  });
+  res.status(200).json(res.advancedResults);
 });
 
 // @route     GET /api/v1/notes/:id
 // @desc      Get a single note
 exports.getNote = asyncHandler(async (req, res, next) => {
-  const tagPopulate = {
-    path: 'tag',
-    select: 'name color slug',
-  };
-
-  const otherTagsPopulate = {
-    path: 'otherTags',
-    select: 'name color slug',
-  };
-
   const note = await Note.findById(req.params.id)
-    .populate(tagPopulate)
-    .populate(otherTagsPopulate);
+    .populate(JSON.parse(process.env.TAG_POPULATE))
+    .populate(JSON.parse(process.env.OTHER_TAGS_POPULATE));
 
   if (!note) {
     return next(new ErrorResponse(`No note with id ${req.params.id}`, 404));
@@ -63,21 +35,11 @@ exports.addNote = asyncHandler(async (req, res, next) => {
     req.body.user = req.user._id;
   }
 
-  const tagPopulate = {
-    path: 'tag',
-    select: 'name color slug',
-  };
-
-  const otherTagsPopulate = {
-    path: 'otherTags',
-    select: 'name color slug',
-  };
-
   const newNote = await Note.create(req.body);
 
   const note = await Note.findById(newNote._id)
-    .populate(tagPopulate)
-    .populate(otherTagsPopulate);
+    .populate(JSON.parse(process.env.TAG_POPULATE))
+    .populate(JSON.parse(process.env.OTHER_TAGS_POPULATE));
 
   res.status(201).json({
     success: true,
@@ -100,14 +62,8 @@ exports.editNote = asyncHandler(async (req, res, next) => {
     new: true,
     runValidators: true,
   })
-    .populate({
-      path: 'tag',
-      select: 'name color',
-    })
-    .populate({
-      path: 'otherTags',
-      select: 'name color',
-    });
+    .populate(JSON.parse(process.env.TAG_POPULATE))
+    .populate(JSON.parse(process.env.OTHER_TAGS_POPULATE));
 
   res.status(200).json({
     success: true,

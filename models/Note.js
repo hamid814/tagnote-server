@@ -18,6 +18,7 @@ const NoteSchema = new mongoose.Schema({
     },
   ],
   byGuest: Boolean,
+  isPersonal: Boolean,
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
