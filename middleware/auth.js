@@ -36,7 +36,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
 });
 
 // check if a user is accessing the route or a guest
-exports.checkUser = asyncHandler(async (req, res, next) => {
+exports.loadUser = asyncHandler(async (req, res, next) => {
   let token;
 
   if (
