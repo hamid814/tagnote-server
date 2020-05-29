@@ -1,8 +1,14 @@
-const advancedResults = (model, populate) => async (req, res, next) => {
+const noteAdvancedResults = (model, config) => async (req, res, next) => {
   let query;
 
   // finding resources
-  query = model.find();
+  if (req.user === 'guest') {
+    query = model.find({ byGuest: true });
+  } else if (req.user.name) {
+    query = model.find();
+  } else {
+    query = model.find({ byGuest: true });
+  }
 
   query = query.sort('-date');
 
@@ -16,8 +22,8 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   query = query.skip(startIndex).limit(limit);
 
   // add population
-  if (populate) {
-    populate.forEach((populate) => {
+  if (config.populate) {
+    config.populate.forEach((populate) => {
       query = query.populate(populate);
     });
   }
@@ -62,4 +68,4 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   next();
 };
 
-module.exports = advancedResults;
+module.exports = noteAdvancedResults;
