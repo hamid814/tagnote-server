@@ -29,4 +29,8 @@ const NoteSchema = new mongoose.Schema({
   },
 });
 
+NoteSchema.pre('save', async function (next, req, callback) {
+  console.log(this);
+});
+
 module.exports = mongoose.model('Note', NoteSchema);
