@@ -5,6 +5,10 @@ const NoteSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please Enter a body text'],
     unique: false,
+    sparse: true,
+    index: {
+      unique: false,
+    },
   },
   tag: {
     type: mongoose.Schema.ObjectId,
@@ -17,20 +21,24 @@ const NoteSchema = new mongoose.Schema({
       ref: 'Tag',
     },
   ],
-  byGuest: Boolean,
-  isPersonal: Boolean,
+  byGuest: {
+    type: Boolean,
+    default: true,
+  },
+  isPersonal: {
+    type: Boolean,
+    default: false,
+  },
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
   },
-  date: {
+  createdAt: {
     type: Date,
     default: new Date(),
   },
 });
 
-NoteSchema.pre('save', async function (next, req, callback) {
-  console.log(this);
-});
+NoteSchema.index({ body: 1 }, { unique: false });
 
 module.exports = mongoose.model('Note', NoteSchema);

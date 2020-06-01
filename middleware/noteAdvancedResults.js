@@ -2,12 +2,17 @@ const noteAdvancedResults = (model, config) => async (req, res, next) => {
   let query;
 
   // finding resources
-  if (req.user === 'guest') {
-    query = model.find({ byGuest: true });
-  } else if (req.user.name) {
-    query = model.find();
+  // if (req.user === 'guest') {
+  //   query = model.find({ byGuest: true });
+  // } else if (req.user.name) {
+  //   query = model.find();
+  // } else {
+  //   query = model.find({ byGuest: true });
+  // }
+  if (req.query.find) {
+    query = model.find({ body: { $regex: req.query.find } });
   } else {
-    query = model.find({ byGuest: true });
+    query = model.find();
   }
 
   query = query.sort('-date');

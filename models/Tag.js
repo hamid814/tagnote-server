@@ -16,7 +16,11 @@ const TagSchema = new mongoose.Schema(
     },
     color: {
       type: String,
-      default: '#6c96',
+      default: '#6c9c',
+    },
+    createdAt: {
+      type: Date,
+      default: new Date(),
     },
   },
   {
