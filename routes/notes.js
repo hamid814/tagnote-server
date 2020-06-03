@@ -9,6 +9,8 @@ const {
   editNote,
   deleteNote,
   deleteMany,
+  getTokenForNote,
+  getNoteWithToken,
 } = require('../controllers/notes');
 const router = express.Router();
 
@@ -31,10 +33,14 @@ router
 
 router.route('/deletemany').delete(protect, deleteMany);
 
+router.get('/view', getNoteWithToken);
+
 router
   .route('/:id')
   .get(getNote)
   .put(protect, editNote)
   .delete(protect, deleteNote);
+
+router.get('/:id/token', protect, getTokenForNote);
 
 module.exports = router;

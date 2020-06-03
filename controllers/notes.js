@@ -1,6 +1,7 @@
 const Note = require('../models/Note');
 const asyncHandler = require('../middleware/asyncHandler');
 const ErrorResponse = require('../utils/errorResponse');
+const jwt = require('jsonwebtoken');
 
 // @route    GET /api/v1/notes
 // @desc     get all notes
@@ -97,4 +98,63 @@ exports.deleteMany = asyncHandler(async (req, res, next) => {
     success: true,
     data: [...req.body.ids],
   });
+});
+
+// @route      GET /api/v1/notes/:id/token
+// @desc       get a Token for a note to share it
+// acccess     Private
+exports.getTokenForNote = asyncHandler(async (req, res, next) => {
+  const note = await Note.findById(req.params.id);
+
+  if (!note) {
+    return next(new ErrorResponse("Note deosn't exits", 404));
+  }
+
+  if (note.user === 'guset') {
+    return next(new ErrorResponse('Note is public', 400));
+  }
+
+  if (String(req.user._id) !== String(note.user)) {
+    return next(
+      new ErrorResponse("You're not allowed to acces this Note", 403)
+    );
+  }
+
+  const token = jwt.sign({ noteId: note._id }, process.env.JWT_SECRET);
+
+  res.status(200).json({
+    success: true,
+    token,
+  });
+});
+
+// @route      GET /api/v1/notes/view?token="token"
+// @desc       view a note with a token
+// acccess     Public
+exports.getNoteWithToken = asyncHandler(async (req, res, next) => {
+  console.log(req.url);
+
+  if (!req.query.token) {
+    return next(new ErrorResponse('no token provided', 400));
+  }
+
+  try {
+    const decoded = await jwt.verify(req.query.token, process.env.JWT_SECRET);
+
+    const note = await Note.findById(decoded.noteId)
+      .populate({
+        ...JSON.parse(process.env.TAG_POPULATE),
+        select: 'name color -_id',
+      })
+      .populate(JSON.parse(process.env.OTHER_TAGS_POPULATE))
+      .populate({ path: 'user', select: 'name -_id' })
+      .select('-isPersonal -byGuest -_id');
+
+    res.status(200).json({
+      success: true,
+      data: note,
+    });
+  } catch (err) {
+    return next(new ErrorResponse('Error', 500));
+  }
 });
