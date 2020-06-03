@@ -72,3 +72,23 @@ exports.loadUser = asyncHandler(async (req, res, next) => {
     return next();
   }
 });
+
+// check a token in the url query params
+// exports.checkToken = asyncHandler(async (req, res, next) => {
+//   let token;
+
+//   if (req.query.token) {
+//     token = req.query.token;
+//   }
+
+//   if (!token) {
+//     return next(new ErrorResponse('please add a token', 400));
+//   }
+
+//   try {
+//     const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+//   } catch (err) {
+//     return next(new ErrorResponse('not Allowed', 403));
+//   }
+// });
