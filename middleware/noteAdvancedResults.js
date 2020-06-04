@@ -15,7 +15,7 @@ const noteAdvancedResults = (model, config) => async (req, res, next) => {
     query = model.find();
   }
 
-  query = query.sort('-date');
+  query = query.sort('-createdAt');
 
   // pagination
   const page = parseInt(req.query.page, 10) || 1;
