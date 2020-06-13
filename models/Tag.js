@@ -35,6 +35,14 @@ TagSchema.pre('save', function (next) {
   next();
 });
 
+// update tag slug if name in changed
+TagSchema.pre('findOneAndUpdate', function (next) {
+  if (Object.keys(this._update).includes('name')) {
+    console.log(this.slug);
+  }
+  next();
+});
+
 // Reverse populate with virtuals
 TagSchema.virtual('notes', {
   ref: 'Note',
