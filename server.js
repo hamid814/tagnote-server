@@ -67,6 +67,7 @@ app.use(logger);
 app.use('/api/v1/tags', require('./routes/tags'));
 app.use('/api/v1/notes', require('./routes/notes'));
 app.use('/api/v1/auth', require('./routes/auth'));
+app.use('/api/v1/users', require('./routes/users'));
 app.use('/colors', require('./routes/colors'));
 app.use('/test', require('./routes/test'));
 
@@ -93,6 +94,9 @@ const works = [
   'in errorHandler must send an array of messages always to control it on the frons easily (in errorRespose it must be conrolled i think)',
   'delete note must not delet it forever, it must be added to deleted collection ( and to bringing back in possible! )',
   'advancedresults doesnt contain req.query',
+  '*** important: *** change tag slug before update',
+  '*** important: *** if added tag sub, add populate sub in returning updated tag',
+  'update and delete user is not avalable to the user ( onlyAdmin )',
 ];
 
 // Log my personal Notes
