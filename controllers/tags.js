@@ -106,5 +106,21 @@ exports.deleteTag = asyncHandler(async (req, res, next) => {
 // @route     PUT /api/v1/tags/:id
 // desc       pudate a tag
 exports.updateTag = asyncHandler(async (req, res, next) => {
-  res.send('update tag');
+  let tag = await Tag.findById(req.params.id);
+
+  if (!tag) {
+    return next(new ErrorResponse(`No tag with id ${req.params.id}`, 404));
+  }
+
+  delete req.body._id;
+
+  tag = await Tag.findByIdAndUpdate(req.params.id, req.body, {
+    runValidators: true,
+    new: true,
+  });
+
+  res.status(200).json({
+    success: true,
+    data: tag,
+  });
 });

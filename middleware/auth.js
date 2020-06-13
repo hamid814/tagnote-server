@@ -73,6 +73,47 @@ exports.loadUser = asyncHandler(async (req, res, next) => {
   }
 });
 
+// only admin access to routes
+exports.onlyAdmin = asyncHandler(async (req, res, next) => {
+  let token;
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+
+  if (!token) {
+    return next(new ErrorResponse('no Token sent', 400));
+  }
+
+  try {
+    const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await User.findById(decoded.id);
+
+    if (!user) {
+      return next(new ErrorResponse('user Not found', 404));
+    }
+
+    if (user.role !== 'admin') {
+      return next(
+        new ErrorResponse(
+          `user role "${user.role}" is not autorized to access this route`,
+          403
+        )
+      );
+    }
+
+    req.user = user;
+
+    next();
+  } catch (err) {
+    return next(new ErrorResponse('not allowed to access this route', 401));
+  }
+});
+
 // check a token in the url query params
 // exports.checkToken = asyncHandler(async (req, res, next) => {
 //   let token;
