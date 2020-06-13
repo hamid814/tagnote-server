@@ -23,6 +23,7 @@ const noteAdvancedResults = (model, config) => async (req, res, next) => {
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
   const total = await model.countDocuments();
+  const totalPages = Math.ceil(total / limit);
 
   query = query.skip(startIndex).limit(limit);
 
@@ -43,6 +44,10 @@ const noteAdvancedResults = (model, config) => async (req, res, next) => {
       page: page + 1,
       limit,
     };
+    pagination.last = {
+      page: totalPages,
+      limit,
+    };
   }
 
   if (startIndex > 0) {
@@ -59,6 +64,13 @@ const noteAdvancedResults = (model, config) => async (req, res, next) => {
     };
   }
 
+  if (page === totalPages) {
+    pagination.prev = {
+      page: page - 1,
+      limit,
+    };
+  }
+
   if (startIndex === 0) {
     delete pagination.prev;
   }
@@ -66,6 +78,7 @@ const noteAdvancedResults = (model, config) => async (req, res, next) => {
   res.advancedResults = {
     success: true,
     count: results.length,
+    total,
     pagination,
     data: results,
   };

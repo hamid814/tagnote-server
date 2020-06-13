@@ -54,9 +54,9 @@ exports.register = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse("admin role is't allowed", 403));
   }
 
-  const user = User.find({ email: req.body.email });
+  const user = await User.find({ email: req.body.email });
 
-  if (!user) {
+  if (user) {
     return next(new ErrorResponse('user already exists', 400));
   }
 
@@ -67,36 +67,5 @@ exports.register = asyncHandler(async (req, res, next) => {
   res.status(201).json({
     success: true,
     token,
-  });
-});
-
-// @route       DELETE /api/v1/auth/deleteuser
-// @desc        Delete a user with Id
-// @ access     Private
-exports.deleteUser = asyncHandler(async (req, res, next) => {
-  if (req.user.role !== 'admin') {
-    return next(new ErrorResponse("you can't access this route", 401));
-  }
-
-  if (!req.body.userId) {
-    return next(
-      new ErrorResponse(
-        'please send id of the user in request body(userId)',
-        400
-      )
-    );
-  }
-
-  const user = await User.findById(req.body.userId);
-
-  if (!user) {
-    return next(new ErrorResponse('user note found', 404));
-  }
-
-  await user.remove();
-
-  res.status(200).json({
-    success: true,
-    data: {},
   });
 });
