@@ -1,11 +1,13 @@
 // Node modules
 const fs = require('fs');
 const path = require('path');
+
 // Js modules
 const express = require('express');
 const colors = require('colors');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+
 // My files
 const tags = require('./db/tags.js');
 const notes = require('./db/notes.js');
