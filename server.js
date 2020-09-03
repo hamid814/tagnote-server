@@ -98,7 +98,7 @@ const works = [
   'advancedresults doesnt contain req.query',
   '*** important: *** change tag slug before update',
   '*** important: *** if added tag sub, add populate sub in returning updated tag',
-  'update and delete user is not avalable to the user ( onlyAdmin )',
+  'update and delete user is not avalable to the user ( onlyAdmin can do it, actually i must say there is no page that user can control its account )',
 ];
 
 // Log my personal Notes
