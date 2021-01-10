@@ -14,8 +14,10 @@ const notes = require('./db/notes.js');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 
+// middlewares
 // Test files and be deleted after development
 const logger = require('./middleware/logger');
+const ipSaver = require('./middleware/ipSaver');
 
 // Initialize express
 const app = express();
@@ -28,6 +30,10 @@ connectDB();
 
 // Body parser
 app.use(express.json({ extended: false }));
+
+// save ip of every one seeing page
+app.set('trust proxy', true);
+app.use(ipSaver);
 
 // dev logger
 if (process.env.NODE_ENV === 'development') {
@@ -72,6 +78,9 @@ app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/users', require('./routes/users'));
 app.use('/colors', require('./routes/colors'));
 app.use('/test', require('./routes/test'));
+
+// private routes ( protected by => no one knows them )
+app.use('/me1/me2/me3/protected/1', require('./routes/ips'));
 
 // serve static assets in production
 if (process.env.NODE_ENV === 'production') {

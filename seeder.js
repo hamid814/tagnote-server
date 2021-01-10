@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 const mongoose = require('mongoose');
 
 const colors = require('colors');
@@ -19,9 +21,13 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
 });
 
-// Read fade database files
+// Read fake database files
 const tags = require('./db/tags');
 const notes = require('./db/notes');
+
+const writeToFile = (fileName, content) => {
+  fs.writeFileSync(`./backups/${fileName}`, JSON.stringify(content));
+}
 
 // Import into DB
 const importData = async (text) => {
@@ -53,8 +59,26 @@ const deleteData = async () => {
   }
 };
 
+const saveData = async () => {
+  try {
+    const users = await User.find();
+
+    users.forEach(user => {
+      writeToFile(`user-${user.id}`, user)
+    });
+    console.log(users.length)
+
+    console.log('users saved')
+    process.exit();
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 if (process.argv[2] === '-i') {
   importData(process.argv[3]);
 } else if (process.argv[2] === '-d') {
   deleteData();
+} else if (process.argv[2] === '-s') {
+  saveData();
 }
