@@ -19,7 +19,7 @@
     "mongoose": "^5.9.7",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.3",
-    "shortid": "^2.2.15",
+    "shortid": "^2.2.16",
     "slugify": "^1.4.0"
   }
 }
