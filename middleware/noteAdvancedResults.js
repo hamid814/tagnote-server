@@ -12,6 +12,8 @@ const noteAdvancedResults = (model, config) => async (req, res, next) => {
   if (req.query.find) {
     query = model.find({ body: { $regex: req.query.find } });
   } else {
+    // if u add this line, make sure you change how you count total.
+    // query = model.find({ user: req.user.id });
     query = model.find();
   }
 
@@ -19,7 +21,7 @@ const noteAdvancedResults = (model, config) => async (req, res, next) => {
 
   // pagination
   const page = parseInt(req.query.page, 10) || 1;
-  const limit = parseInt(req.query.limit, 10) || 20;
+  const limit = parseInt(req.query.limit, 10) || 200;
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
   const total = await model.countDocuments();

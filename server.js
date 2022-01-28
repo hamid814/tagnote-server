@@ -87,6 +87,7 @@ app.use(errorHandler);
 
 // My personal ntoes
 const works = [
+  '*** security alert ***: in noteAdvancedResults if there is a request query named "find" the result will search all users notes!',
   'add controllers to client-side',
   'note model is incomplete',
   'note update route is incompelete',

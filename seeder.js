@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs');
 
 const mongoose = require('mongoose');
 
@@ -27,7 +27,7 @@ const notes = require('./db/notes');
 
 const writeToFile = (fileName, content) => {
   fs.writeFileSync(`./backups/${fileName}`, JSON.stringify(content));
-}
+};
 
 // Import into DB
 const importData = async (text) => {
@@ -63,22 +63,37 @@ const saveData = async () => {
   try {
     const users = await User.find();
 
-    users.forEach(user => {
-      writeToFile(`user-${user.id}`, user)
+    users.forEach((user) => {
+      writeToFile(`user-${user.id}`, user);
     });
-    console.log(users.length)
+    console.log(users.length);
 
-    console.log('users saved')
+    console.log('users saved');
     process.exit();
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-}
+};
+
+const test = async () => {
+  try {
+    const res = await User.find();
+
+    console.log(res);
+    process.exit();
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 if (process.argv[2] === '-i') {
   importData(process.argv[3]);
 } else if (process.argv[2] === '-d') {
+  // delete all db
   deleteData();
 } else if (process.argv[2] === '-s') {
+  // insert sample data
   saveData();
+} else if (process.argv[2] === '-t') {
+  test();
 }
